@@ -106,7 +106,7 @@ add_action( 'init', 'cpt_book' );
 *  Create Custom Taxonomy "Book Category" for CPT Book.
 **/
  
-function wpl_owt_create_book_category() {
+function custom_book_category_tax() {
     register_taxonomy(
         'book_category', 'book', array(
         'label' => __('Book Category'),
@@ -115,4 +115,4 @@ function wpl_owt_create_book_category() {
             )
     );
 }
-add_action('init', 'wpl_owt_create_book_category');
+add_action('init', 'custom_book_category_tax');
