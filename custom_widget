@@ -1,1 +1,20 @@
+/* Create Custom Widget For Footer (functions.php) */
 
+function footer_widgets_init() {
+	register_sidebar( array(
+		'name'          => 'Footer 1',
+		'id'            => 'footer_one',
+		'description'   => 'This is the custom widget for Footer',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h5 class="text-light">',
+		'after_title'   => '</h5>',
+	) );
+}
+add_action( 'widgets_init', 'footer_widgets_init' );
+
+/* Displaying Widget (footer.php) */
+
+<?php if ( is_active_sidebar( 'footer_one' ) ) : ?>
+		<?php dynamic_sidebar( 'footer_one' ); ?>
+<?php endif; ?>
