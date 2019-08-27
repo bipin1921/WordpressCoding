@@ -18,3 +18,39 @@ add_action( 'widgets_init', 'footer_widgets_init' );
 <?php if ( is_active_sidebar( 'footer_one' ) ) : ?>
 		<?php dynamic_sidebar( 'footer_one' ); ?>
 <?php endif; ?>
+
+/*Dispaly Custom Post Types to front-end (page-cpt.php)*/
+<?php 
+	get_header();
+?>
+
+<?php
+$book_posts = new WP_Query(array(
+	"post_type" => "book"
+));
+ 
+query_posts($book_posts);
+
+while($book_posts->have_posts()) :
+	$book_posts->the_post();
+?>
+
+<div style="text-align:center; padding:20px;" > 
+	<h4><?php echo get_the_title(); ?></h4>
+	<p><?php the_content(); ?></p>
+	<p>Book Category: <?php
+	
+	$category_id = 	get_post_meta(get_the_ID(),"book_category_selected",true);
+	$post_details = get_post($category_id,ARRAY_A);
+	echo $post_details['post_title'];
+	/*print_r($post_details);*/
+?>
+</p>
+</div> 
+<?php
+	endwhile;
+?>
+
+<?php 
+	get_footer();
+?>
